@@ -51,3 +51,9 @@ def post_publish(request, pk):
 def publish(self):
     self.published_date = timezone.now()
     self.save()
+
+def post_remove(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.method=='POST':
+        post.delete()
+    return redirect('post_list')
